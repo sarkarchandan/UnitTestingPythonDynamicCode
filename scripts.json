@@ -1,0 +1,8 @@
+{
+  "test_disallowed_input": "name = input('Enter your name')\n\napi._message(name)",
+  "test_disallowed_import": "import datetime\n\napi._message(datetime.date.today())",
+  "test_disallowed_exec": "exec(len([1,2,3,4,5]))\n\napi._message('hello world')",
+  "test_allowed_numpy_basic": "arr = arange(25).reshape(5,5)\narr.ndim\narr.dtype\napi._message(arr.tostring())",
+  "test_allowed_numpy_pandas_basic": "@vectorize\ndef email(first,last):\n  return f'{first.lower()}.{last.lower()}@email.com'\ndf = pandas.DataFrame({  'first': ['Johny','Larry','Bill'],\n  'last': ['Appleseed','Googleseed','Microseed']\n})\ndf['email'] = email(df['first'],df['last'])\ndf.loc[1]\napi._message(df.to_string())\n",
+  "test_disallowed_in_callbacks": ""
+}

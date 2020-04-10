@@ -1,0 +1,8 @@
+version: '3'
+services:
+  testpy:
+    container_name: testpy
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: sh run_test.sh
