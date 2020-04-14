@@ -1,6 +1,16 @@
-def an_error(e):
-    er = ValueError(str(e))
-    return er
+class DisallowedUseError(Exception):
+
+    def __init__(self, *args):
+        if args:
+            self.err = args[0]
+        else:
+            self.err = None
+
+    def __str__(self):
+        if self.err:
+            return f'Raised exception: {str(self.err)}'
+        else:
+            return f'{self.__name__} raised'
 
 
 class Operator(object):
@@ -29,4 +39,4 @@ class Operator(object):
                 '__builtins__': safe_builtins
             })
         except Exception as e:
-            raise an_error(e)
+            raise DisallowedUseError(e)

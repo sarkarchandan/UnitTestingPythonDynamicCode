@@ -2,7 +2,7 @@ import unittest
 import json
 import os
 import inspect
-from dynexec.operator import Operator
+from dynexec.operator import Operator, DisallowedUseError
 
 
 class TestOperator(unittest.TestCase):
@@ -21,19 +21,19 @@ class TestOperator(unittest.TestCase):
 
     def test_disallowed_input(self):
         self.operator._script = self.scripts[inspect.currentframe().f_code.co_name]
-        with self.assertRaises(ValueError):
+        with self.assertRaises(DisallowedUseError):
             self.operator._execute()
             self.assertIsNone(self.operator._result.body)
 
     def test_disallowed_import(self):
         self.operator._script = self.scripts[inspect.currentframe().f_code.co_name]
-        with self.assertRaises(ValueError):
+        with self.assertRaises(DisallowedUseError):
             self.operator._execute()
             self.assertIsNone(self.operator._result.body)
 
     def test_disallowed_exec(self):
         self.operator._script = self.scripts[inspect.currentframe().f_code.co_name]
-        with self.assertRaises(ValueError):
+        with self.assertRaises(DisallowedUseError):
             self.operator._execute()
             self.assertIsNone(self.operator._result.body)
 
